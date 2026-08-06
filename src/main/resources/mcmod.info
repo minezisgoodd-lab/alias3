@@ -1,0 +1,16 @@
+[
+{
+  "modid": "playeraliases",
+  "name": "PlayerAliases",
+  "description": "Client-side only mod that lets you locally rename other players with colored aliases, applied to nametags, the tab list, and chat. Nothing is sent to the server or other players.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["YourName"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

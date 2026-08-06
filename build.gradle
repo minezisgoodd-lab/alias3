@@ -1,0 +1,62 @@
+buildscript {
+    repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '2.3-SNAPSHOT', changing: true
+    }
+}
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+version = "1.0.0"
+group = "com.playeraliases"
+archivesBaseName = "playeraliases"
+
+sourceCompatibility = targetCompatibility = '1.8'
+compileJava {
+    sourceCompatibility = targetCompatibility = '1.8'
+    options.encoding = 'UTF-8'
+}
+
+// IMPORTANT: this first build will download Minecraft, Forge, and MCP mappings.
+// It requires internet access and can take several minutes the first time.
+minecraft {
+    version = "1.12.2-14.23.5.2860"
+    runDir = "run"
+    mappings = "stable_39"
+    // Client-only mod: nothing extra needed here, but you can uncomment
+    // to speed up dev-run setup by skipping server assets if desired.
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Gson is already bundled with Minecraft/Forge, no extra dependency needed.
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        expand 'version': project.version, 'mcversion': project.minecraft.version
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+jar {
+    manifest {
+        attributes(
+            "FMLCorePluginContainsFMLMod": "true",
+            "ForceLoadAsMod": "true"
+        )
+    }
+}
